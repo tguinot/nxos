@@ -77,7 +77,6 @@ static inline bool is_point_on_screen(point p) {
 
   else
     return FALSE;
-  
 }
 /* Simply swap the values of two points */
 static inline void swap_points(point *a, point *b) {
