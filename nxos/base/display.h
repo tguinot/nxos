@@ -58,6 +58,50 @@ void nx_display_auto_refresh(bool auto_refresh);
  */
 void nx_display_refresh(void);
 
+/** Display an ellipse rotated of @a angle degrees on the screen
+ *
+ * @param center The center point of the ellipse
+ * @param smj The superior radius of the ellipse, in pixels
+ * @param smn The inferior radius of the ellipse, in pixels
+ * @param angle The angle of rotation of the ellipse, in degrees
+ *
+ * @return 0 if everything went OK, -1 otherwise
+ */
+S8 nx_display_ellipse(point center, U8 smj, U8 smn, U32 angle);
+
+/**
+ * Macro for displaying circles
+ */
+#define nx_display_circle(center, radius) nx_display_ellipse((center), (radius), (radius), 0)
+
+/** Display a point (a pixel) on the screen 
+ *
+ * @param p The point to display
+ *
+ * @return 0 if everything went OK, -1 otherwise
+ */ 
+bool nx_display_point(point p);
+
+/** Display a line represented by points @a a and @a b
+ *
+ * @param a First end point of the line
+ * @param b Second end point of the line
+ *
+ * @return 0 if everything went OK, -1 otherwise
+ */
+S8 nx_display_line(point a, point b);
+
+/** Display an arc of @a angle degrees with an offset angle of @a offset degrees
+ *
+ * @param center The center point of the arc
+ * @param radius The radius of the arc, in pixels
+ * @param angle The angle of the arc, in degrees
+ * @param offset The offset angle the arc begins at
+ * 
+ * @return 0 if everything went OK, -1 otherwise
+ */
+S8 nx_display_arc(point center, U8 radius, U32 angle, U32 offset);
+
 /** Move the cursor to line @a x and column @a y.
  *
  * @param x The cursor's new line position.

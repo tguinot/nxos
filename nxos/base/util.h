@@ -32,6 +32,10 @@
  */
 #define MAX(x, y) ((x) > (y) ? (x): (y))
 
+int power_of(int a, int b);
+
+int square_root(int a_nInput);
+
 /** Copy @a len bytes from @a src to @a dest.
  *
  * @param dest Destination of the copy.

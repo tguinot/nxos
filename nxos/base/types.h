@@ -16,6 +16,7 @@
 /** @addtogroup typesAndUtils */
 /*@{*/
 
+
 typedef unsigned char U8; /**< Unsigned 8-bit integer. */
 typedef signed char S8; /**< Signed 8-bit integer. */
 typedef unsigned short U16; /**< Unsigned 16-bit integer. */
@@ -26,6 +27,13 @@ typedef signed long S32; /**< Signed 32-bit integer. */
 typedef U32 size_t; /**< Abstract size type, needed by the memory allocator. */
 
 typedef U8 bool; /**< Boolean data type. */
+
+typedef struct _point
+{
+  S8 x;
+  S8 y;
+} point;
+
 #define FALSE (0) /**< False boolean value. */
 #define TRUE (!FALSE) /**< True boolean value. */
 

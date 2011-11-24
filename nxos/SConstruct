@@ -115,7 +115,7 @@ def appkernel_tool(env):
             kvariant + '.elf',
             [env['NXOS_BASEPLATE'], app_kernel, env['NXOS_LIBGCC']],
             '$LINK -o $TARGET -T %s -Os --gc-sections --no-check-sections '
-            '$SOURCES' % variant_lds[0].path)
+            '$SOURCES /opt/arm-gcc/build/newlib-1.17.0/arm-elf/thumb/interwork/newlib/libm/libm.a /opt/arm-gcc/install/arm-elf/lib/interwork/libc.a /opt/arm-gcc/install/lib/gcc/arm-elf/4.4.0/interwork/libgcc.a' % variant_lds[0].path)
         env.Depends(variant_kernel_elf, variant_lds)
 
         # ... And make a binary image from that.
@@ -217,7 +217,7 @@ mycflags = ['-mcpu=arm7tdmi', '-Os', '-Wextra', '-Wall', '-Werror',
                       '-Wpointer-arith', '-Wbad-function-cast',
                       '-Wmissing-prototypes', '-ffreestanding',
                       '-fsigned-char', '-ffunction-sections', '-std=gnu99',
-                      '-fdata-sections', '-fomit-frame-pointer', '-msoft-float']
+                      '-fdata-sections', '-fomit-frame-pointer', '-lc', '-lgcc', '-lm', '-msoft-float' ]
 myasflags = ['-Wall', '-Werror', '-Os'];
 if str(env['NXOS_LIBGCC']).find('interwork') != -1:
     mycflags.append('-mthumb-interwork')

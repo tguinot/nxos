@@ -42,6 +42,10 @@
 /** Height of the LCD display, in bytes. */
 #define LCD_HEIGHT 8 /* == 64 pixels. */
 
+/** Size of the LCD in pixels */
+#define LCD_PIXEL_WIDTH LCD_WIDTH
+#define LCD_PIXEL_HEIGHT (LCD_HEIGHT * 8)
+
 /** Initialize the LCD driver. */
 void nx__lcd_init(void);
 

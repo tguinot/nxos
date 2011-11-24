@@ -10,6 +10,42 @@
 #include "base/util.h"
 #include "base/assert.h"
 
+int power_of(int a, int b) {
+  int result = 1;
+
+  if(b > 0) {
+    result = power_of(a, (b - 1)) ;
+    result *= a;
+  }
+
+  return result;
+
+}
+
+int square_root(int a_nInput) {
+    int op  = a_nInput;
+    int res = 0;
+    int one = 1uL << 30;
+
+
+    while (one > op)
+    {
+        one >>= 2;
+    }
+
+    while (one != 0)
+    {
+        if (op >= res + one)
+        {
+            op = op - (res + one);
+            res = res +  2 * one;
+        }
+        res >>= 1;
+        one >>= 2;
+    }
+    return res;
+}
+
 void memcpy(void *dest, const void *source, U32 len) {
   U8 *dst = (U8*)dest;
   U8 *src = (U8*)source;
