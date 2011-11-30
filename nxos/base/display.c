@@ -100,8 +100,8 @@ static point rotate_point(point a, point center, U32 angle) {
 
   rangle = (angle * M_PI) / 180;
 
-  result.x = (a.x - center.x) * cos(rangle) - (a.y - center.y) * sin(rangle) + center.x;
-  result.y = (a.x - center.x) * sin(rangle) + (a.y - center.y) * cos(rangle) + center.y;
+  result.x = (a.x - center.x) * cosine(rangle) - (a.y - center.y) * sine(rangle) + center.x;
+  result.y = (a.x - center.x) * sine(rangle) + (a.y - center.y) * cosine(rangle) + center.y;
 
   return result;
 }
@@ -133,19 +133,27 @@ S8 nx_display_line(point a, point b) {
   /* Calculate the slope */
   S8 dx = (b.x - a.x);
   S8 dy = (b.y - a.y);
-   /* For each abscissa, calculate the ordinate and display all points between two calculated points*/
-  for(current.x = a.x; current.x < b.x; current.x++) {
-    current.y =  a.y + ( ( dy *  (current.x - a.x) ) / dx  );
-    nx_display_point(current);
-    /* Display all points between two points to avoid gaps */
-    while(current.y != a.y + ( ( dy *  (current.x+1 - a.x) ) / dx  )) {
+
+  current = a;
+
+  if(dx == 0)
+    for(current.y = a.y; current.y != b.y; a.y < b.y ? current.y++ : current.y--)
       nx_display_point(current);
-      a.y < b.y ? current.y++ : current.y--;
+  else {  
+    /* For each abscissa, calculate the ordinate and display all points between two calculated points*/
+    for(current.x = a.x; current.x <= b.x; current.x++) {
+      current.y =  a.y + ( ( dy *  (current.x - a.x) ) / dx  );
+      nx_display_point(current);
+      /* Display all points between two points to avoid gaps */
+      while(current.y != a.y + ( ( dy *  (current.x+1 - a.x) ) / dx  )) {
+        nx_display_point(current);
+        a.y < b.y ? current.y++ : current.y--;
+      }
     }
   }
-
   return 0;
 }
+
 /* Draw an ellipse represented by its center and its 2 radius */
 S8 nx_display_ellipse(point center, U8 smj, U8 smn, U32 angle) {
   point current;
@@ -189,13 +197,13 @@ S8 nx_display_arc(point center, U8 radius, U32 angle, U32 offset) {
   /* If the angle is inferior to 90 degrees, display it */
   if(angle <= 90) {
     /* For each abscissa, calculate the ordinates and display two point*/
-    for(current.y = center.y; current.y <= (center.y + (radius * sin(rangle))); current.y++) {
+    for(current.y = center.y; current.y <= (center.y + (radius * sine(rangle))); current.y++) {
       current.x = square_root(power_of(radius, 2) - power_of((current.y - center.y), 2)) + center.x;
       to_draw = rotate_point(current, center, offset);
       nx_display_point(to_draw);
     }
     /* For each ordinate, calculate the abscissas and display two point*/
-    for(current.x = center.x; current.x <= (center.x + (radius * cos(rangle))); current.x++) {
+    for(current.x = center.x; current.x <= (center.x + (radius * cosine(rangle))); current.x++) {
       current.y = square_root(power_of(radius, 2) - power_of((current.x - center.x), 2)) + center.y;
       to_draw = rotate_point(current, center, offset);
       nx_display_point(to_draw);

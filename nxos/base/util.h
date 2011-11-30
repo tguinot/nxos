@@ -32,9 +32,18 @@
  */
 #define MAX(x, y) ((x) > (y) ? (x): (y))
 
-int power_of(int a, int b);
+#define M_PI 3.14159265358979323846
+#define cordic_1K 0x26DD3B6A
+#define CORDIC_NTAB 32
+#define MUL 1073741824.000000
 
-int square_root(int a_nInput);
+float sine(float a);
+
+float cosine(float a); 
+
+double power_of(double a, double b);
+
+int square_root(int a);
 
 /** Copy @a len bytes from @a src to @a dest.
  *

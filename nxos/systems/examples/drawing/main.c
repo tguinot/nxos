@@ -17,14 +17,14 @@
 
 #include "base/drivers/avr.h"
 #include "base/core.h"
+#include "base/util.h"
 #include "base/display.h"
 #include "base/drivers/systick.h" /* for nx_systick_wait_ms */
-#include <math.h>
 
 void main() {
   /* We want to draw a moving ellipse, two arcs and two lines */
   /* Declaring center point of the ellipse / arcs and  points representing the lines */
-  point ellipse_c, q, r, s, t;
+  point ellipse_c, q, r, s, t, u, v, w;
 
   /* Initialize ellipse center position */
   ellipse_c.x = 1;
@@ -43,6 +43,16 @@ void main() {
 
   t.x = 76;
   t.y = 63;
+
+  /* initialize the triangle position */
+  u.x = 48;
+  u.y = 33;
+
+  v.x = 48;
+  v.y = 45;
+
+  w.x = 61;
+  w.y = 39;
 
   /* Superior radius of the ellipse */
   U8 sradius = 85;
@@ -66,7 +76,7 @@ void main() {
     if(ellipse_c.x < 53) {
       ellipse_c.x ++;
       delta--;
-      ellipse_c.y = (30 * sin( ((float) ellipse_c.x) / 25) + 4);
+      ellipse_c.y = (30 * sine( ((float) ellipse_c.x) / 25) + 4);
     }
     /* If the ellipse have past the first third of the screen,
       then start to move lines and rotate arcs */
@@ -102,6 +112,7 @@ void main() {
     /* Just draw the ellipse, every frame */
     nx_display_ellipse(ellipse_c, (sradius / 4), ((sradius - delta) / 3), (ellipse_c.x * 20) ); 
 
+    nx_display_triangle(u, v, w);
     /* Last step of the frame : refresh the screen */
     nx_display_refresh();
 

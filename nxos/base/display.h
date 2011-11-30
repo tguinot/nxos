@@ -73,7 +73,7 @@ S8 nx_display_ellipse(point center, U8 smj, U8 smn, U32 angle);
  * Macro for displaying circles
  */
 #define nx_display_circle(center, radius) nx_display_ellipse((center), (radius), (radius), 0)
-
+#define nx_display_triangle(a, b, c) nx_display_line((a), (b)); nx_display_line((b), (c)); nx_display_line((c), (a)); 
 /** Display a point (a pixel) on the screen 
  *
  * @param p The point to display
