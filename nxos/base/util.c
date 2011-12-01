@@ -16,11 +16,11 @@ int cordic_ctab [] = {0x3243F6A8, 0x1DAC6705, 0x0FADBAFC, 0x07F56EA6, 0x03FEAB76
 0x000003FF, 0x000001FF, 0x000000FF, 0x0000007F, 0x0000003F, 0x0000001F, 0x0000000F,
 0x00000008, 0x00000004, 0x00000002, 0x00000001, 0x00000000, };
 
-double power_of(double a, double b) {
+double pow(double a, double b) {
   double result = 1;
 
   if(b > 0) {
-    result = power_of(a, (b - 1)) ;
+    result = pow(a, (b - 1)) ;
     result *= a;
   }
 
@@ -28,7 +28,7 @@ double power_of(double a, double b) {
 
 }
 
-int square_root(int a_nInput) {
+int sqrti(int a_nInput) {
   int op  = a_nInput;
   int res = 0;
   int one = 1uL << 30;
@@ -48,7 +48,7 @@ int square_root(int a_nInput) {
   return res;
 }
 
-float sine(float angle) {
+float sinf(float angle) {
   int i = 0;
   int minus = 0;
   int theta = 0;
@@ -69,7 +69,7 @@ float sine(float angle) {
 
   if(angle > M_PI/2) {
     angle -= (M_PI/2);
-    y = cosine(angle) * MUL;
+    y = cosf(angle) * MUL;
   }
 
   else {
@@ -89,10 +89,10 @@ float sine(float angle) {
     }
   }
 
-  return ((float) power_of((-1), i) * y * (float) power_of((-1), minus)) / MUL;
+  return ((float) pow((-1), i) * y * (float) pow((-1), minus)) / MUL;
 }
 
-float cosine(float angle) {
+float cosf(float angle) {
   int i = 0;
   int theta = 0;
   int n = 32;
@@ -110,7 +110,7 @@ float cosine(float angle) {
 
   if(angle > M_PI/2) {
     angle -= (M_PI/2);
-    x = sine(-angle) * MUL;
+    x = sinf(-angle) * MUL;
   }
   else {
     theta = angle * MUL;
@@ -128,7 +128,7 @@ float cosine(float angle) {
     }
   }
 
-  return ((float) power_of((-1), i) * x) / MUL;
+  return ((float) pow((-1), i) * x) / MUL;
 }
 
 

@@ -37,13 +37,13 @@
 #define CORDIC_NTAB 32
 #define MUL 1073741824.000000
 
-float sine(float a);
+float sinf(float a);
 
-float cosine(float a); 
+float cosf(float a); 
 
-double power_of(double a, double b);
+double pow(double a, double b);
 
-int square_root(int a);
+int sqrti(int a);
 
 /** Copy @a len bytes from @a src to @a dest.
  *
