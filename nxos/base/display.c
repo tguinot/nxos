@@ -100,8 +100,8 @@ static point rotate_point(point a, point center, U32 angle) {
 
   rangle = (angle * M_PI) / 180;
 
-  result.x = (a.x - center.x) * cosine(rangle) - (a.y - center.y) * sine(rangle) + center.x;
-  result.y = (a.x - center.x) * sine(rangle) + (a.y - center.y) * cosine(rangle) + center.y;
+  result.x = (a.x - center.x) * cosf(rangle) - (a.y - center.y) * sinf(rangle) + center.x;
+  result.y = (a.x - center.x) * sinf(rangle) + (a.y - center.y) * cosf(rangle) + center.y;
 
   return result;
 }
@@ -163,7 +163,7 @@ S8 nx_display_ellipse(point center, U8 smj, U8 smn, U32 angle) {
     return -1;
   /* For each abscissa, calculate the ordinates and display two point*/
   for(current.x = (center.x - smj); current.x < (center.x + smj); current.x++) {
-    current.y = square_root( (power_of(smn, 2) * (power_of(smj, 2) - power_of((current.x - center.x), 2))) / power_of(smj, 2) ) + center.y;
+    current.y = sqrti( (pow(smn, 2) * (pow(smj, 2) - pow((current.x - center.x), 2))) / pow(smj, 2) ) + center.y;
     to_draw = rotate_point(current, center, angle);
     nx_display_point(to_draw);
 
@@ -173,7 +173,7 @@ S8 nx_display_ellipse(point center, U8 smj, U8 smn, U32 angle) {
   }
   /* For each ordinate, calculate the abscissas and display two point*/
   for(current.y = (center.y - smn); current.y < (center.y + smn); current.y++) {
-    current.x = square_root( (power_of(smj, 2) * (power_of(smn, 2) - power_of((current.y - center.y), 2))) / power_of(smn, 2) ) + center.x;
+    current.x = sqrti( (pow(smj, 2) * (pow(smn, 2) - pow((current.y - center.y), 2))) / pow(smn, 2) ) + center.x;
     to_draw = rotate_point(current, center, angle);
     nx_display_point(to_draw); 
 
@@ -197,14 +197,14 @@ S8 nx_display_arc(point center, U8 radius, U32 angle, U32 offset) {
   /* If the angle is inferior to 90 degrees, display it */
   if(angle <= 90) {
     /* For each abscissa, calculate the ordinates and display two point*/
-    for(current.y = center.y; current.y <= (center.y + (radius * sine(rangle))); current.y++) {
-      current.x = square_root(power_of(radius, 2) - power_of((current.y - center.y), 2)) + center.x;
+    for(current.y = center.y; current.y <= (center.y + (radius * sinf(rangle))); current.y++) {
+      current.x = sqrti(pow(radius, 2) - pow((current.y - center.y), 2)) + center.x;
       to_draw = rotate_point(current, center, offset);
       nx_display_point(to_draw);
     }
     /* For each ordinate, calculate the abscissas and display two point*/
-    for(current.x = center.x; current.x <= (center.x + (radius * cosine(rangle))); current.x++) {
-      current.y = square_root(power_of(radius, 2) - power_of((current.x - center.x), 2)) + center.y;
+    for(current.x = center.x; current.x <= (center.x + (radius * cosf(rangle))); current.x++) {
+      current.y = sqrti(pow(radius, 2) - pow((current.x - center.x), 2)) + center.y;
       to_draw = rotate_point(current, center, offset);
       nx_display_point(to_draw);
     }

@@ -76,7 +76,7 @@ void main() {
     if(ellipse_c.x < 53) {
       ellipse_c.x ++;
       delta--;
-      ellipse_c.y = (30 * sine( ((float) ellipse_c.x) / 25) + 4);
+      ellipse_c.y = (30 * sinf( ((float) ellipse_c.x) / 25) + 4);
     }
     /* If the ellipse have past the first third of the screen,
       then start to move lines and rotate arcs */

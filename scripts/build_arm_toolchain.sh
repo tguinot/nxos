@@ -27,7 +27,7 @@ NEWLIB_URL=ftp://sources.redhat.com/pub/newlib/newlib-1.17.0.tar.gz
 NEWLIB_VERSION=1.17.0
 NEWLIB_DIR=newlib-$NEWLIB_VERSION
 
-GDB_URL=ftp://ftp.gnu.org/gnu/gdb/gdb-6.8.tar.bz2
+GDB_URL=ftp://ftp.gnu.org/gnu/gdb/gdb-6.8a.tar.bz2
 GDB_VERSION=6.8
 GDB_DIR=gdb-$GDB_VERSION
 
